@@ -1,16 +1,16 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    id(Plugins.androidApplication)
+    id(Plugins.jetbrainsKotlinAndroid)
 }
 
 android {
     namespace = "com.aria.dansh.testsolid"
-    compileSdk = 34
+    compileSdk = SDK.COMPILE
 
     defaultConfig {
         applicationId = "com.aria.dansh.testsolid"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = SDK.MIN
+        targetSdk = SDK.TARGET
         versionCode = 1
         versionName = "1.0"
 
@@ -30,11 +30,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JDKVersion.JavaVer
+        targetCompatibility = JDKVersion.JavaVer
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JDKVersion.jvmTarget
     }
     buildFeatures {
         compose = true
@@ -51,19 +51,21 @@ android {
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(Dependencies.androidx_core_ktx)
+    implementation(Dependencies.androidx_lifecycle_runtime_ktx)
+    implementation(Dependencies.androidx_activity_compose)
+    implementation(platform(Dependencies.androidx_compose_bom))
+
+    implementation(Dependencies.androidx_ui)
+    implementation(Dependencies.androidx_ui_graphics)
+    implementation(Dependencies.androidx_ui_tooling_preview)
+    implementation(Dependencies.androidx_material3)
+    testImplementation(Dependencies.junit)
+
+    androidTestImplementation(Dependencies.androidx_junit)
+    androidTestImplementation(Dependencies.androidx_espresso_core)
+    androidTestImplementation(platform(Dependencies.androidx_compose_bom))
+    androidTestImplementation(Dependencies.androidx_ui_test_junit4)
+    debugImplementation(Dependencies.androidx_ui_tooling)
+    debugImplementation(Dependencies.androidx_ui_test_manifest)
 }
