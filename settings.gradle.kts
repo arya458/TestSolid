@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "TestSolid"
 include(":app")
-//include(":buildSrc")

@@ -1,6 +1,8 @@
 plugins {
     id(Plugins.androidApplication)
     id(Plugins.jetbrainsKotlinAndroid)
+    id(Plugins.hilt)
+    id(Plugins.kapt)
 }
 
 android {
@@ -68,4 +70,20 @@ dependencies {
     androidTestImplementation(Dependencies.androidx_ui_test_junit4)
     debugImplementation(Dependencies.androidx_ui_tooling)
     debugImplementation(Dependencies.androidx_ui_test_manifest)
+
+    implementation(Dependencies.hilt_android)
+    kapt(Dependencies.hilt_android_compiler)
+    implementation(Dependencies.androidx_hilt_navigation_compose)
+
+    implementation(Dependencies.play_services_auth)
+    implementation(Dependencies.play_services_auth_api_phone)
+
+    implementation(Dependencies.work_runtime_ktx)
+
+    // Arrow
+    implementation("io.arrow-kt:arrow-core:1.2.0")
+    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0")
+
+
+
 }

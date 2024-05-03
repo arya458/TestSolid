@@ -45,6 +45,26 @@ object Dependencies {
     val androidx_material3 by lazy { "androidx.compose.material3:material3" }
 
 
+    //    androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+    val androidx_hilt_navigation_compose by lazy { "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationCompose}" }
+
+    //    hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+    val hilt_android by lazy { "com.google.dagger:hilt-android:${Versions.hiltAndroid}" }
+
+    //    hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
+    val hilt_android_compiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.hiltAndroid}" }
+
+    // implementation "androidx.work:work-runtime-ktx:$work_version"
+    val work_runtime_ktx by lazy { "androidx.work:work-runtime-ktx:${Versions.work_version}" }
+
+
+    //    implementation("com.google.android.gms:play-services-auth:20.5.0")
+    val play_services_auth by lazy { "com.google.android.gms:play-services-auth:${Versions.play_services_auth}" }
+
+    //    implementation("com.google.android.gms:play-services-auth-api-phone:18.0.1")
+    val play_services_auth_api_phone by lazy { "com.google.android.gms:play-services-auth-api-phone:${Versions.play_services_auth_api_phone}" }
+
+
 }
 
 
