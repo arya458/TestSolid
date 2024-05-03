@@ -80,9 +80,7 @@ dependencies {
 
     implementation(Dependencies.work_runtime_ktx)
 
-    // Arrow
-    implementation("io.arrow-kt:arrow-core:1.2.0")
-    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0")
+    implementation("com.google.accompanist:accompanist-permissions:0.34.0")
 
 
 
