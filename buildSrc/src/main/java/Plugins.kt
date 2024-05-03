@@ -10,5 +10,8 @@ object Plugins {
     //    jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
     const val jetbrainsKotlinJvm ="org.jetbrains.kotlin.jvm"
 
+    const val hilt ="com.google.dagger.hilt.android"
+    const val kapt ="kotlin-kapt"
+
 
 }
