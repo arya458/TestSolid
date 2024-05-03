@@ -1,6 +1,6 @@
 package com.aria.dansh.testsolid.smsManager.util
 
-enum class WorkerDataName{
+enum class WorkerPramName{
 
     NUMBER,
     MESSAGE

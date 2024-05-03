@@ -22,7 +22,7 @@ import com.aria.dansh.testsolid.TestSolidApplication.Companion.CHANNEL_ID
 import com.aria.dansh.testsolid.smsManager.domain.model.MessageDTO
 import com.aria.dansh.testsolid.smsManager.domain.repository.MessengerRepository
 import com.aria.dansh.testsolid.smsManager.util.MessageState
-import com.aria.dansh.testsolid.smsManager.util.WorkerDataName
+import com.aria.dansh.testsolid.smsManager.util.WorkerPramName
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -67,8 +67,8 @@ class MessengerRepositoryImpl(
         notificationWorker.apply {
             setInputData(
                 workDataOf(
-                    WorkerDataName.NUMBER.name to message.phoneNumber,
-                    WorkerDataName.MESSAGE.name to message.text
+                    WorkerPramName.NUMBER.name to message.phoneNumber,
+                    WorkerPramName.MESSAGE.name to message.text
                 )
             )
             setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
@@ -90,7 +90,6 @@ class MessengerRepositoryImpl(
                 // on below line sending sms
                 smsManager.sendTextMessage(message.phoneNumber, null, message.text, null, null)
                 // on below line displaying
-                // toast message as sms send.
                 emit(MessageState.Success("Message Sent To " + message.phoneNumber))
                 phoneNumberLiveData.value = message.phoneNumber
             } catch (e: Exception) {
