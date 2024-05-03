@@ -1,4 +1,4 @@
-package com.aria.dansh.testsolid.ui.theme
+package com.aria.dansh.testsolid.smsManager.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

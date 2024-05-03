@@ -1,4 +1,4 @@
-package com.aria.dansh.testsolid.ui.theme
+package com.aria.dansh.testsolid.smsManager.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
