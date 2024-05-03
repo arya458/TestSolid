@@ -20,6 +20,20 @@ class NotificationWorker(appContext: Context, workerParams: WorkerParameters):
     Worker(appContext, workerParams) {
 
     private val notificationId = 17
+
+
+    fun notificationBuilder(pendingIntent: PendingIntent, number: String?, textMessage: String?):NotificationCompat.Builder{
+        return NotificationCompat.Builder(applicationContext, TestSolidApplication.CHANNEL_ID)
+            .setSmallIcon(R.drawable.baseline_message_24)
+            .setContentTitle(number)
+            .setContentText(textMessage)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(textMessage))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+    }
+
+
     override fun doWork(): Result {
         val intent = Intent(applicationContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -32,18 +46,7 @@ class NotificationWorker(appContext: Context, workerParams: WorkerParameters):
         val number = inputData.getString(WorkerDataName.NUMBER.name)
         val textMessage = inputData.getString(WorkerDataName.MESSAGE.name)
 
-        val builder = NotificationCompat.Builder(applicationContext, TestSolidApplication.CHANNEL_ID)
-            .setSmallIcon(R.drawable.baseline_message_24)
-            .setContentTitle(number)
-            .setContentText(textMessage)
-            .setStyle(NotificationCompat.BigTextStyle().bigText(textMessage))
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-        Log.d(
-            "messageReceiver",
-            "Worker is Running "
-        )
+        val builder = notificationBuilder(pendingIntent,number,textMessage)
 
         with(NotificationManagerCompat.from(applicationContext)) {
             if (ActivityCompat.checkSelfPermission(
