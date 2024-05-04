@@ -54,41 +54,39 @@ class SmsManagerViewModel @Inject constructor(
             val messages = messageRepository.getMessage()
             messages.observeForever { messagesArray ->
                 for (message in messagesArray) {
-                    if (message.originatingAddress != null)
+
+                    if (message.originatingAddress != null && _phoneNumber.value != "")
                         if (message.originatingAddress!!.contains(
-                                _phoneNumber.value.replace(
-                                    "0",
-                                    ""
-                                )
+                            _phoneNumber.value.replace(
+                                "0", ""
                             )
-                        ) {
-                            messageRepository.sendNotification(
-                                MessageDTO(
-                                    message.originatingAddress.toString(),
-                                    message.messageBody.toString()
-                                )
+                        )
+                    ) {
+                        messageRepository.sendNotification(
+                            MessageDTO(
+                                message.originatingAddress.toString(),
+                                message.messageBody.toString()
                             )
-                        }
+                        )
+                    }
                 }
             }
         }
     }
 
-    private fun checkPhoneNumber(phoneNumber: String) {
+    fun checkPhoneNumber(phoneNumber: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            if (Patterns.PHONE.matcher(phoneNumber).matches())
-                if (phoneNumber[0] == '0')
-                    if (phoneNumber.length == 11)
-                        _phoneNumberState.emit(PhoneNumberState.Success("Looks Good"))
-                    else
-                        _phoneNumberState.emit(PhoneNumberState.Success("Phone Number Is To Short"))
-                else if (phoneNumber[0] == '+')
-                    if (phoneNumber.length == 13)
-                        _phoneNumberState.emit(PhoneNumberState.Success("Looks Good"))
-                    else
-                        _phoneNumberState.emit(PhoneNumberState.Success("Phone Number Is To Short"))
-                else
-                    _phoneNumberState.emit(PhoneNumberState.NumberOnly("Phone Number Should Contain Numbers ONLY"))
+            if (Patterns.PHONE.matcher(phoneNumber)
+                    .matches()
+            ) if (phoneNumber[0] == '0') if (phoneNumber.length == 11) _phoneNumberState.emit(
+                PhoneNumberState.Success("Looks Good")
+            )
+            else _phoneNumberState.emit(PhoneNumberState.Success("Phone Number Is To Short"))
+            else if (phoneNumber[0] == '+') if (phoneNumber.length == 13) _phoneNumberState.emit(
+                PhoneNumberState.Success("Looks Good")
+            )
+            else _phoneNumberState.emit(PhoneNumberState.Success("Phone Number Is To Short"))
+            else _phoneNumberState.emit(PhoneNumberState.NumberOnly("Phone Number Should Contain Numbers ONLY"))
 
         }
     }

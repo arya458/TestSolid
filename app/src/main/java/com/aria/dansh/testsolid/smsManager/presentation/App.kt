@@ -27,7 +27,7 @@ import com.aria.dansh.testsolid.smsManager.util.PhoneNumberState
 
 
 @Composable
-fun App(viewModel: SmsManagerViewModel= hiltViewModel()) {
+fun App(viewModel: SmsManagerViewModel = hiltViewModel()) {
     val phoneNumber = remember { mutableStateOf("") }
     val textMessage = remember { mutableStateOf("") }
 
@@ -35,28 +35,34 @@ fun App(viewModel: SmsManagerViewModel= hiltViewModel()) {
     val sendMessageState by viewModel.sendMessageState.collectAsState()
     val phoneNumberState by viewModel.phoneNumberState.collectAsState()
 
-    Column(Modifier.fillMaxSize(),Arrangement.Center,Alignment.CenterHorizontally) {
+    Column(Modifier.fillMaxSize(), Arrangement.Center, Alignment.CenterHorizontally) {
 
-        TextField(value = phoneNumber.value, onValueChange = {phoneNumber.value = it}, modifier = Modifier
-            .fillMaxWidth(0.8f)
-            .height(60.dp),
+        TextField(
+            value = phoneNumber.value, onValueChange = {
+                phoneNumber.value = it
+                viewModel.checkPhoneNumber(it)
+            }, modifier = Modifier
+                .fillMaxWidth(0.8f)
+                .height(60.dp),
             placeholder = {
-            Text(text = "Phone Number", color = MaterialTheme.colorScheme.onSurface)
-        },
+                Text(text = "Phone Number", color = MaterialTheme.colorScheme.onSurface)
+            },
             // This Way I Check The Result For My Responds
             isError = phoneNumberState !is PhoneNumberState.Success
         )
         Spacer(modifier = Modifier.size(10.dp))
-        TextField(value = textMessage.value, onValueChange = {textMessage.value = it}, modifier = Modifier
-            .fillMaxWidth(0.8f)
-            .fillMaxHeight(0.5f), placeholder = {
-            Text(text = "Your Message ...", color = MaterialTheme.colorScheme.onSurface)
-        })
+        TextField(value = textMessage.value,
+            onValueChange = { textMessage.value = it },
+            modifier = Modifier
+                .fillMaxWidth(0.8f)
+                .fillMaxHeight(0.5f),
+            placeholder = {
+                Text(text = "Your Message ...", color = MaterialTheme.colorScheme.onSurface)
+            })
         Spacer(modifier = Modifier.size(10.dp))
-        Button(onClick = { viewModel.sendMessage(phoneNumber.value,textMessage.value) }) {
+        Button(onClick = { viewModel.sendMessage(phoneNumber.value, textMessage.value) } , enabled = phoneNumberState is PhoneNumberState.Success) {
             Text(text = "Send")
         }
-
 
 
     }
@@ -64,7 +70,7 @@ fun App(viewModel: SmsManagerViewModel= hiltViewModel()) {
 
 @Composable
 @Preview()
-fun AppTest(){
+fun AppTest() {
 
     App()
 
